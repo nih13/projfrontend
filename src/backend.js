@@ -1,1 +1,1 @@
-export const API= process.env.REACT_APP_NiharikaBackend;
+export const API= process.env.REACT_APP_BACKEND;

@@ -5,7 +5,7 @@ import Base from "./Base";
 
 export default function Home(){
 
-    console.log("API IS",API);
+    console.log("API IS", API);
     return (
        <Base title="Home Page" description="Welcome to the T-SHIRT store">
            <div className="row">

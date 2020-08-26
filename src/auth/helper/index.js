@@ -2,8 +2,8 @@ import {API} from "../../backend";
 //API means the address i.e. http://localhost:8000/api/
 
 
-export const signup = user=>{
-    return fetch(`${API}`/signup , {
+export const signup = user =>{
+    return fetch(`${API}signup` , {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -19,7 +19,7 @@ export const signup = user=>{
 
 
 export const signin = user=>{
-    return fetch(`${API}`/signin , {
+    return fetch(`${API}/signin` , {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -31,7 +31,7 @@ export const signin = user=>{
         return response.json();
     })
     .catch(err => console.log(err))
-}
+};
 
 export const authenticate =(data,next)=>{
     if(typeof window !== "undefined"){
@@ -54,7 +54,7 @@ export const signout = next=>{
     
 }
 
-export const isAuthenticates =()=>{
+export const isAuthenticated =()=>{
     if(typeof window == "undefined"){
         return false
     }
