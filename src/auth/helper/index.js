@@ -1,9 +1,9 @@
 import {API} from "../../backend";
-//API means the address i.e. http://localhost:8000/api/
+//API means the address i.e. http://localhost:8000/api
 
 
 export const signup = user =>{
-    return fetch(`${API}signup` , {
+    return fetch(`${API}/signup` , {
         method: "POST",
         headers: {
             Accept: "application/json",

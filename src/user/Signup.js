@@ -40,7 +40,7 @@ const Signup = () =>{
                 success: true              });
             }
         })
-        .catch(console.log("errror in Signup"));
+        .catch(console.log("error in Signup"));
     }
 
     const SignUpForm = ()=>{

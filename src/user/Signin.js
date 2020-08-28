@@ -7,14 +7,14 @@ import {signin , authenticate, isAuthenticated} from "../auth/helper"
 const Signin = () =>{
 
     const [values, setValues] = useState({
-        email: "",
-        password:"",
+        email: "b@gmail.com",
+        password:"12345",
         error:"",
         loading: false,
         didRedirect: false
     })
     
-     const {email, password, error, loading, didRedirect} = values
+    const {email, password, error, loading, didRedirect} = values;
     const {user} = isAuthenticated();
     
     const handleChange = name => event =>{
@@ -25,17 +25,16 @@ const Signin = () =>{
         event.preventDefault();
         setValues({...values, error: false , loading:true})
         signin({email, password})
-        .then(
-            data => {
-                if(data.error){
-                    setValues({...values, error: data.error , loading:false})
+        .then(data => {
+                if(data.errors){
+                    setValues({...values, error: data.errors , loading:false})
                 }else{
                     authenticate(data, ()=>{
                         setValues({
                             ...values,
                             didRedirect: true
-                        })
-                    })
+                        });
+                    });
                 }
             }
         )
@@ -45,16 +44,16 @@ const Signin = () =>{
     const performRedirect = ()=>{
         if(didRedirect){
             if (user && user.role ===1){
-                return<p>redirect to admin</p>
+                return<Redirect to="/admin/dashboard"/>;
             }
             else{
-                return <p>redirect to user dashboard</p>
+                return <Redirect to="/user/dashboard"/>;
             }
         }
-        if(isAuthenticated){
+        if(isAuthenticated()){
             return <Redirect to="/"/>;
         }
-    }
+    };
 
 
 
@@ -91,7 +90,7 @@ const Signin = () =>{
                         
                         <div className="form-group">
                             <label className="text-light">Email</label>
-                            <input onChange={handleChange("email")} value={password} value={email} className="form-control" type ="email"/>
+                            <input onChange={handleChange("email")} value={email} className="form-control" type ="email"/>
                         </div>
                         <div className="form-group">
                             <label className="text-light">Password</label>
@@ -111,12 +110,13 @@ const Signin = () =>{
 
     return(
         <Base title = "Sign in Page" description="User can SignIn!!">
-        {SignInForm()}
         {loadingMessage()}
         {errorMessage()}
+        {SignInForm()}
         {performRedirect()}
+            <p className="text-white text-center">{JSON.stringify(values)}</p>
         </Base>
     )
-}
+};
 
 export default Signin;
